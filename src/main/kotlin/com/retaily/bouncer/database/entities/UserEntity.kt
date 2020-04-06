@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -14,7 +15,7 @@ import javax.persistence.*
 class UserEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long? = null
+    private var user_id: Long? = null
     private var firstName: String? = null
     private var lastName: String? = null
     private var email: String? = null
@@ -27,9 +28,7 @@ class UserEntity() {
         this.password = password
     }
 
-    fun mapToModel(): User {
-        return User(id!!, firstName!!, lastName!!, email!!)
-    }
+    fun mapToModel(): User = User(user_id!!, firstName!!, lastName!!, email!!)
 }
 
 @Repository
@@ -38,4 +37,6 @@ interface UserRepository : CrudRepository<UserEntity, Long> {
 
     @Query(value = "SELECT u FROM #{#entityName} u WHERE u.email = ?1")
     fun findByEmail(@Param("email") email: String): UserEntity?
+
+    override fun findById(id: Long): Optional<UserEntity>
 }
