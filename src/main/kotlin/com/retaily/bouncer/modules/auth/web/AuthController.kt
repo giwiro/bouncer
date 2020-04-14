@@ -11,7 +11,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping(path = ["/bouncer/auth"])
-class Controller(
+class AuthController(
         @Autowired val useCase: AuthUseCase,
         @Autowired val service: SessionService) {
 
@@ -36,20 +36,15 @@ class Controller(
         return user
     }
 
-    @GetMapping(path = ["/get-session"])
+    @GetMapping(path = ["/session"])
+    @Authorized
     fun getSession(): User? {
-        val userId = service.getUserId() ?: throw NotInSessionException("Not in session")
-        return useCase.getUser(GetUserRequest(userId))
+        val userId = service.getUserId()
+        return useCase.getUser(GetUserRequest(userId!!))
     }
 
     @PostMapping(path = ["/logout"])
     fun logout() {
         service.finishSession()
-    }
-
-    @GetMapping(path = ["/test"])
-    @Authorized
-    fun test(): String {
-        return "Test"
     }
 }

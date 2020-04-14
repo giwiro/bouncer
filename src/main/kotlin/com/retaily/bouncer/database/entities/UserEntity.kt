@@ -15,11 +15,11 @@ import javax.persistence.*
 class UserEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var user_id: Long? = null
-    private var firstName: String? = null
-    private var lastName: String? = null
-    private var email: String? = null
-    private var password: String? = null
+    var userId: Long? = null
+    var firstName: String? = null
+    var lastName: String? = null
+    var email: String? = null
+    var password: String? = null
 
     constructor(firstName: String, lastName: String, email: String, password: String) : this() {
         this.firstName = firstName
@@ -28,7 +28,7 @@ class UserEntity() {
         this.password = password
     }
 
-    fun mapToModel(): User = User(user_id!!, firstName!!, lastName!!, email!!)
+    fun mapToModel(): User = User(userId!!, firstName!!, lastName!!, email!!)
 }
 
 @Repository

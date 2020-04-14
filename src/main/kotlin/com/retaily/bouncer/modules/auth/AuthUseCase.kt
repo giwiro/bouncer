@@ -2,6 +2,7 @@ package com.retaily.bouncer.modules.auth
 
 import com.retaily.bouncer.common.web.NotInSessionException
 import com.retaily.bouncer.crypto.encodePassword
+import com.retaily.bouncer.crypto.validatePassword
 import com.retaily.bouncer.database.entities.UserRepository
 import com.retaily.bouncer.models.User
 import com.retaily.bouncer.database.entities.UserEntity
@@ -28,6 +29,10 @@ class AuthUseCase constructor(@Autowired val userRepository: UserRepository) {
     fun login(request: LoginRequest): User {
         val foundUser = userRepository.findByEmail(request.email)
                 ?: throw WrongCredentialsException("Wrong credentials")
+
+        if (!validatePassword(request.password, foundUser.password!!)) {
+            throw WrongCredentialsException("Wrong credentials")
+        }
         return foundUser.mapToModel()
     }
 }

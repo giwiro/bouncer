@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession
 @Service
 class SessionService(@Autowired val session: HttpSession) {
     fun startSession(user: User) {
-        session.setAttribute("userId", user.user_id)
+        session.setAttribute("userId", user.userId)
     }
 
     fun getUserId(): Long? {
