@@ -2,7 +2,6 @@ package com.retaily.bouncer.modules.auth.web
 
 import com.retaily.bouncer.common.web.SessionService
 import com.retaily.bouncer.common.web.Authorized
-import com.retaily.bouncer.common.web.NotInSessionException
 import com.retaily.bouncer.models.User
 import com.retaily.bouncer.modules.auth.*
 import org.springframework.beans.factory.annotation.Autowired

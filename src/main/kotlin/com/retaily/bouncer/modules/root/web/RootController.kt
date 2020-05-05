@@ -1,0 +1,18 @@
+package com.retaily.bouncer.modules.root.web
+
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.info.BuildProperties
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+@RequestMapping(path = ["/bouncer"])
+class RootController(@Autowired val buildProperties: BuildProperties) {
+
+    @GetMapping(path = ["/version"])
+    fun getVersion(): Map<String, String> {
+        val version = buildProperties.version
+        return mapOf("version" to version);
+    }
+}

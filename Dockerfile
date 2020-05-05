@@ -6,6 +6,7 @@ WORKDIR ${WORKDIR}
 RUN ./gradlew build -x test
 
 FROM openjdk:8-jdk-alpine
+RUN apk --update add iputils curl #postgresql-client redis
 RUN addgroup -S bouncer && adduser -S bouncer -G bouncer
 USER bouncer:bouncer
 ARG WORKDIR=/home/bouncer
