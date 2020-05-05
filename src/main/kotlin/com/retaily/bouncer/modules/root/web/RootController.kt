@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(path = ["/bouncer"])
 class RootController(@Autowired val buildProperties: BuildProperties) {
-
     @GetMapping(path = ["/version"])
-    fun getVersion(): Map<String, String> {
-        val version = buildProperties.version
-        return mapOf("version" to version);
-    }
+    fun getVersion() = mapOf("version" to buildProperties.version)
 }
