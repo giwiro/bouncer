@@ -1,6 +1,6 @@
 package com.retaily.bouncer.modules.auth
 
-import com.retaily.bouncer.common.web.NotInSessionException
+import com.retaily.common.web.NotInSessionException
 import com.retaily.bouncer.crypto.encodePassword
 import com.retaily.bouncer.crypto.validatePassword
 import com.retaily.bouncer.database.entities.UserRepository

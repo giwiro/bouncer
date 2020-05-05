@@ -1,7 +1,7 @@
 package com.retaily.bouncer.modules.auth.web
 
-import com.retaily.bouncer.common.web.SessionService
-import com.retaily.bouncer.common.web.Authorized
+import com.retaily.common.web.SessionService
+import com.retaily.common.web.Authorized
 import com.retaily.bouncer.models.User
 import com.retaily.bouncer.modules.auth.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +23,7 @@ class AuthController(
                 requestBody.password!!
         )
         val createdUser = useCase.createUser(useCaseRequest)
-        service.startSession(createdUser)
+        service.startSession(createdUser.id)
         return createdUser
     }
 
@@ -31,7 +31,7 @@ class AuthController(
     fun login(@Valid @RequestBody requestBody: LoginWebRequest): User? {
         val useCaseRequest = LoginRequest(requestBody.email!!, requestBody.password!!)
         val user = useCase.login(useCaseRequest)
-        service.startSession(user)
+        service.startSession(user.id)
         return user
     }
 
